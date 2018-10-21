@@ -37,12 +37,12 @@ Vagrant.configure(2) do |config|
 	  libstdc++6:i386 \
 	  ibstdc++5:i386
 
-	sudo bash /tmp/snx_install.sh
+    sudo bash /tmp/snx_install.sh
 
 	# iptables -t nat -A OUTPUT -p tcp -d 10.250.30.33 --dport 443 -j DNAT --to-destination X.X.X.X
 	/sbin/iptables-save > /etc/iptables/rules
 
-	sudo cat <<- EOF >> /lib/systemd/system/shadowsocks-libev-local@config.service
+    sudo cat <<- EOF >> /lib/systemd/system/shadowsocks-libev-local@config.service
     [Unit]
     Description=Shadowsocks-Libev Custom Client Service for %I
     Documentation=man:ss-local(1)
