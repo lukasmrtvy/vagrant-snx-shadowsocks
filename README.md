@@ -1,0 +1,1 @@
+# vagrant-snx-shadowsocks
