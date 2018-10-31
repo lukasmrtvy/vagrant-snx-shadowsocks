@@ -31,6 +31,7 @@ Vagrant.configure(2) do |config|
     apt -qq update && apt -qq upgrade -y && apt -qq install -y \
     shadowsocks-libev \
     resolvconf \
+    ifupdown \
     iptables-persistent \
 	  libpam0g:i386 \
 	  libx11-6:i386 \
