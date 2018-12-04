@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
 
    /sbin/iptables-save > /etc/iptables/rules.v4
 
-   sed -i "s|DAEMON_ARGS=.*|DAEMON_ARGS=\"-s 0.0.0.0 -u --fast-open\"|g" /etc/default/shadowsocks-libev
+   sed -i "s|DAEMON_ARGS=.*|DAEMON_ARGS=\"-s 0.0.0.0 -u --fast-open -k secret \"|g" /etc/default/shadowsocks-libev
 
    systemctl restart shadowsocks-libev.service
 
@@ -56,31 +56,5 @@ Vagrant.configure(2) do |config|
    echo "nameserver 127.0.0.53" > /etc/resolv.conf
 
    timedatectl set-timezone Europe/Prague
-
-   cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.service
-   [Unit]
-   Description=resolvconf watcher
-   After=network.target
-
-   [Service]
-   Type=oneshot
-   ExecStart=/bin/systemctl restart shadowsocks-libev.service
-
-   [Install]
-   WantedBy=multi-user.target
-EOF
-
-
-   cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.path
-   [Path]
-   PathModified=/etc/resolv.conf
-
-   [Install]
-   WantedBy=multi-user.target
-EOF
-
-   systemctl enable resolvconf-watcher.path && systemctl start resolvconf-watcher.path
-   systemctl enable shadowsocks-libev.service && systemctl start shadowsocks-libev.service
-
   '
 end
