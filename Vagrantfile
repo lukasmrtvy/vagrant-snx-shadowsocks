@@ -51,13 +51,13 @@ Vagrant.configure(2) do |config|
 
    timedatectl set-timezone Europe/Prague
 
-    sudo cat <<- EOF >> /etc/systemd/system/resolvconf-reseter.service
+    cat <<- EOF >> /etc/systemd/system/resolvconf-reseter.service
     [Unit]
-    Description=/etc/resolf.conf reseter
+    Description=/etc/resolv.conf reseter
     After=network.target
     [Service]
-    Type=simple
-    ExecStart=/bin/echo "nameserver 127.0.0.53" > /etc/resolv.conf
+    Type=oneshot
+    ExecStart=/bin/bash -c "/bin/echo \"nameserver 127.0.0.53\" > /etc/resolv.conf"
     [Install]
     WantedBy=multi-user.target
 EOF
