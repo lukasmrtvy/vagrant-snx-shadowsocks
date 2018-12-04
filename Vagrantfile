@@ -57,23 +57,21 @@ Vagrant.configure(2) do |config|
 
    timedatectl set-timezone Europe/Prague
 
-   sudo cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.service
-
+   cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.service
    [Unit]
    Description=resolvconf watcher
    After=network.target
 
    [Service]
    Type=oneshot
-   ExecStart=/bin/systemctl reload shadowsocks-libev.service
+   ExecStart=/bin/systemctl restart shadowsocks-libev.service
 
    [Install]
    WantedBy=multi-user.target
 EOF
 
 
-   sudo cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.path
-
+   cat <<- EOF >> /etc/systemd/system/resolvconf-watcher.path
    [Path]
    PathModified=/etc/resolv.conf
 
