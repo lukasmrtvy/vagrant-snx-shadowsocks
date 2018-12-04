@@ -8,15 +8,9 @@ Vagrant.configure(2) do |config|
     v.name = VM_NAME
     v.memory = 2048
   end
-  config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
-  config.vm.network "forwarded_port", guest: 443, host: 4443, auto_correct: true
 
   config.vm.network "forwarded_port", guest: 8388, host: 8388, protocol: "tcp", host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 8388, host: 8388, protocol: "udp", host_ip: "127.0.0.1"
-
-  #config.vm.network "private_network", type: "dhcp"
-
-  config.vm.usable_port_range = 8000..8999
 
   config.vm.synced_folder "shared", "/shared", create: true, automount: true
 
