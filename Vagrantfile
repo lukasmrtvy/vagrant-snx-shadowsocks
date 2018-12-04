@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
 
    bash /tmp/snx_install.sh
 
-   iptables -t nat -A OUTPUT -p tcp -d 10.250.30.33 --dport 443 -j DNAT --to-destination 88.208.115.107
+   iptables -t nat -A OUTPUT -p tcp -d X.X.X.X --dport 443 -j DNAT --to-destination Y.Y.Y.Y
 
    /sbin/iptables-save > /etc/iptables/rules.v4
 
